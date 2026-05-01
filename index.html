@@ -83,7 +83,7 @@ button:disabled {
   <div class="subtitle">A부터 T까지 20개 빙고판을 중복 없이 추첨합니다</div>
 
   <button id="drawButton" onclick="drawBingo()">추첨 시작</button>
-
+  <video id="camera" autoplay playsinline style="width:100%; max-width:600px; border-radius:12px;"></video>
   <div id="result">?</div>
 
   <div id="remain">남은 빙고판: A B C D E F G H I J K L M N O P Q R S T</div>
@@ -92,6 +92,16 @@ button:disabled {
 </div>
 
 <script>
+
+// 카메라 실행
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+  document.getElementById('camera').srcObject = stream;
+})
+.catch(err => {
+  console.log("카메라 허용 필요");
+});
+
 let remaining = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"];
 let pickedList = [];
 let count = 0;
